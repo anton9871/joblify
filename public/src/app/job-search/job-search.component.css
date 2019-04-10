@@ -1,0 +1,83 @@
+.title{
+    margin-top: 80px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    
+}
+.titleCaption {
+    text-align: center;
+    color: white;
+
+}
+.formWrapper {
+    display: inline-block;
+    background-color: rgba(0,0,0,.6);
+    width: 100%;
+    padding: 10px;
+    margin-top: 70px;
+}
+
+
+.workImg {
+
+    position: fixed;
+    width: 100%;
+    vertical-align: top;
+    z-index: -1;
+}
+
+.leftContainer {
+    display: inline-block;
+    width: 50%;
+    background-color:white;
+}
+    .resultsContainer{
+        width: 100%;
+        height: 100%;
+        border: 1px solid rgb(196, 194, 194);
+        cursor: pointer;
+    }
+    .resultsLeft{
+    display: inline-block;
+    vertical-align: top;
+    }
+    .resultsMiddle{
+    display: inline-block;
+    margin-left: 4px;
+    }
+        .jobTitle{
+        font-weight: bold;
+        font-size: 15px;
+        text-decoration-line: underline;
+        }
+        .jobCompany{
+        font-size: 14px;
+        color: rgb(100, 139, 235)
+        }
+        .jobLocation{
+        font-size: 13px;
+        }
+        
+    .resultsRight{
+            display: inline-block;
+            vertical-align: top;
+        }
+        .starIcon{
+            margin-left: 5px;
+            cursor: pointer;
+            color: rgb(97, 97, 239);
+        }
+    p {
+        height: 7px;
+        size: 15px;
+        }
+
+.detailsContainer {
+    display: inline-block;
+    vertical-align: top;
+    width: 50%;
+    /* margin-left: 5px; */
+    background-color:white;
+}
+        

@@ -1,0 +1,117 @@
+<app-navbar></app-navbar>
+<table class="table table-striped table-dark">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">{{job1.company}}</th>
+        <th scope="col">{{job2.company}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Title</td>
+        <td>{{job1.title}}</td>
+        <td>{{job2.title}}</td>
+      </tr>
+      <tr>
+        <td>Type</td>
+        <td>{{job1.type}}</td>
+        <td>{{job2.type}}</td>
+      </tr>
+      <tr>
+        <td>Date Posted</td>
+        <td>{{job1.datePosted}}</td>
+        <td>{{job2.datePosted}}</td>
+      </tr>
+      <tr>
+        <td>Location</td>
+        <td>{{job1.location}}</td>
+        <td>{{job2.location}}</td>
+      </tr>
+      <tr>
+        <td>Status</td>
+        <td>{{job1.status}}</td>
+        <td>{{job2.status}}</td>
+      </tr>
+      <tr>
+        <td>Contact Email</td>
+        <td>{{job1.contactEmail}}</td>
+        <td>{{job2.contactEmail}}</td>
+      </tr>
+      <tr>
+        <td>Salary Range</td>
+        <td>{{job1.salaryRange}}</td>
+        <td>{{job2.salaryRange}}</td>
+      </tr>
+      <tr>
+        <td>Performance Bonus</td>
+        <td *ngIf="job1.performanceBonus == true; else noBonus"><i class="material-icons">check_circle_outline</i></td>
+          <ng-template #noBonus> <td></td> </ng-template>
+        <td *ngIf="job2.performanceBonus == true; else noBonus2"><i class="material-icons">check_circle_outline</i></td>
+          <ng-template #noBonus2> <td></td> </ng-template>
+      </tr>
+      <tr>
+        <td>Stock Compensation</td>
+        <td *ngIf="job1.stockCompensation == true; else noStock"><i class="material-icons">check_circle_outline</i></td>
+          <ng-template #noStock> <td></td> </ng-template>
+        <td *ngIf="job2.stockCompensation == true; else noStock2"><i class="material-icons">check_circle_outline</i></td>
+          <ng-template #noStock2> <td></td> </ng-template>
+      </tr>
+      <tr>
+        <td>Health</td>
+        <td *ngIf="job1.health == true; else noHealth"><i class="material-icons">check_circle_outline</i></td>
+          <ng-template #noHealth> <td></td> </ng-template>
+        <td *ngIf="job2.health == true; else noHealth2"><i class="material-icons">check_circle_outline</i></td>
+          <ng-template #noHealth2> <td></td> </ng-template>
+      </tr>
+      <tr>
+        <td>Dental</td>
+        <td *ngIf="job1.dental == true; else noDental"><i class="material-icons">check_circle_outline</i></td>
+          <ng-template #noDental> <td></td> </ng-template>
+        <td *ngIf="job2.dental == true; else noDental2"><i class="material-icons">check_circle_outline</i></td>
+          <ng-template #noDental2> <td></td> </ng-template>
+      </tr>
+      <tr>
+        <td>Vision</td>
+        <td *ngIf="job1.vision == true; else noVision"><i class="material-icons">check_circle_outline</i></td>
+          <ng-template #noVision> <td></td> </ng-template>
+        <td *ngIf="job2.vision == true; else noVision2"><i class="material-icons">check_circle_outline</i></td>
+          <ng-template #noVision2> <td></td> </ng-template>
+      </tr>
+      <tr>
+        <td>401K Match</td>
+        <td *ngIf="job1.K == true; else noK"><i class="material-icons">check_circle_outline</i></td>
+          <ng-template #noK> <td></td> </ng-template>
+        <td *ngIf="job2.K == true; else noK2"><i class="material-icons">check_circle_outline</i></td>
+          <ng-template #noK2> <td></td> </ng-template>
+      </tr>
+      <tr>
+        <td>Life Insurance</td>
+        <td *ngIf="job1.lifeInsurance == true; else noLife"><i class="material-icons">check_circle_outline</i></td>
+          <ng-template #noLife> <td></td> </ng-template>
+        <td *ngIf="job2.lifeInsurance == true; else noLife2"><i class="material-icons">check_circle_outline</i></td>
+          <ng-template #noLife2> <td></td> </ng-template>
+      </tr>
+      <tr>
+        <td>Catered Lunch</td>
+        <td *ngIf="job1.cateredLunch == true; else noLunch"><i class="material-icons">check_circle_outline</i></td>
+          <ng-template #noLunch> <td></td> </ng-template>
+        <td *ngIf="job2.cateredLunch == true; else noLunch2"><i class="material-icons">check_circle_outline</i></td>
+          <ng-template #noLunch2> <td></td> </ng-template>
+      </tr>
+      <tr>
+        <td>Gym Stipend</td>
+        <td *ngIf="job1.gymStipend == true; else noGym"><i class="material-icons">check_circle_outline</i></td>
+          <ng-template #noGym> <td></td> </ng-template>
+        <td *ngIf="job2.gymStipend == true; else noGym2"><i class="material-icons">check_circle_outline</i></td>
+          <ng-template #noGym2> <td></td> </ng-template>
+      </tr>
+      <tr>
+        <td>Phone Stipend</td>
+        <td *ngIf="job1.phoneStipend == true; else noPhone"><i class="material-icons">check_circle_outline</i></td>
+          <ng-template #noPhone> <td></td> </ng-template>
+        <td *ngIf="job2.phoneStipend == true; else noPhone2"><i class="material-icons">check_circle_outline</i></td>
+          <ng-template #noPhone2> <td></td> </ng-template>
+      </tr>
+    </tbody>
+  </table>

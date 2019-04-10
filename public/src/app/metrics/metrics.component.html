@@ -1,0 +1,41 @@
+<app-navbar></app-navbar>
+<body>
+  <div *ngIf="doughnutData" class="doughnutChart">
+    <h4 class="doughnutTitle">Jobs by Current Status</h4>
+    <canvas
+      baseChart
+      [data]="doughnutData"
+      [labels]="doughnutLabels"
+      [chartType]="doughnutType"
+      [options]="doughnutOptions">
+    </canvas>
+  </div>
+
+  <div *ngIf="salaryData" class="salaryChart">
+    <h4 class="salaryTitle">Salary by Company (in thousands)</h4>
+    <canvas
+      baseChart
+      [data]="salaryData"
+      [labels]="salaryLabels"
+      [chartType]="salaryType"
+      [options]="salaryOptions">
+    </canvas>
+  </div>
+
+  <div *ngIf="jobsAddedData" class="jobsAddedChart">
+    <h4 class="jobsAddedTitle">Jobs Added by Day</h4>
+    <canvas
+      baseChart
+      [data]="jobsAddedData"
+      [labels]="jobsAddedLabels"
+      [chartType]="jobsAddedType"
+      [options]="jobsAddedOptions">
+    </canvas>
+  </div>
+
+
+  
+
+  
+</body>
+

@@ -1,0 +1,212 @@
+<app-navbar></app-navbar>
+<!-- modal to add a new job -->
+<ng-template #jobForm let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add New Job</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form (submit)="addNewJob()">
+            <input [(ngModel)]="newJob.company" name="newJob.company" class="form-control mt-1" placeholder="Company"
+                type="text">
+            <input [(ngModel)]="newJob.title" name="newJob.title" class="form-control mt-1" placeholder="Title"
+                type="text">
+            <input [(ngModel)]="newJob.location" name="newJob.location" class="form-control mt-1" placeholder="Location"
+                type="text">
+            <input [(ngModel)]="newJob.logo" name="newJob.logo" class="form-control mt-1" placeholder="Logo URL"
+                type="text">
+            <input [(ngModel)]="newJob.datePosted" name="newJob.datePosted" class="form-control mt-1"
+                placeholder="Date Posted" type="text">
+            <input [(ngModel)]="newJob.type" name="newJob.type" class="form-control mt-1" placeholder="Type"
+                type="text">
+            <input [(ngModel)]="newJob.description" name="newJob.description" class="form-control mt-1"
+                placeholder="Description" type="text">
+            <input [(ngModel)]="newJob.url" name="newJob.url" class="form-control mt-1" placeholder="Job URL"
+                type="text">
+            <div>
+                <button type="submit" class="btn btn-primary mt-1 float-sm-right" data-dismiss="modal">Add</button>
+            </div>
+        </form>
+    </div>
+</ng-template>
+
+
+
+
+
+<!-- show all favorited jobs -->
+<div class="leftContainer">
+    <!-- button to open up the modal to add a new job -->
+    <i class="material-icons addButton" (click)="openJobForm(jobForm)">add</i>
+    <div class="resultsContainer" *ngFor="let i of favJobs" (click)="showJobDetails(i)">
+        <div class="resultsLeft">
+            <img src="{{i.logo}}" alt="logo" width="45">
+        </div>
+        <div class="resultsMiddle">
+            <p class="jobTitle">{{i.title}}</p>
+            <p class="jobCompany">{{i.company}}</p>
+            <p class="jobLocation">{{i.location}}</p>
+
+            <input type="checkbox" (click)="appendId(i.id)" [openDelay]="150"   ngbTooltip="Select up to two companies and click 'Compare'"> <p class="jobCompare" (click)="compareTwoCompanies()">Compare</p>
+        </div>
+        <div class="resultsRight">
+            <div class="d-inline jobStatus" *ngIf="i.status == 'Interested'"
+                style="background-color: Blue; color: white; width: 400px;">
+                &nbsp;&nbsp;{{i.status}}&nbsp;&nbsp;&nbsp;
+            </div>
+            <div class="d-inline jobStatus" *ngIf="i.status == 'Applied'" style="background-color: purple; color:white">
+                &nbsp;&nbsp;{{i.status}}&nbsp;&nbsp;&nbsp;</div>
+            <div class="d-inline jobStatus" *ngIf="i.status == 'Interview'"
+                style="background-color: green; color:white">&nbsp;&nbsp;{{i.status}}&nbsp;&nbsp;&nbsp;</div>
+            <div class="d-inline jobStatus" *ngIf="i.status == 'Offer'"
+                style="background-color: rgb(165, 126, 52); color:white">&nbsp;&nbsp;{{i.status}}&nbsp;&nbsp;&nbsp;
+            </div>
+            <div class="d-inline jobStatus" *ngIf="i.status == 'Denied'" style="background-color: red; color:white">
+                &nbsp;&nbsp;{{i.status}}&nbsp;&nbsp;&nbsp;</div>
+            <i class="material-icons editIcon" (click)="showJobDetails(i); open(content)">launch</i>
+            <i (click)="deleteJob(i.id)" class="far fa-trash-alt trash"></i>
+        </div>
+    </div>
+</div>
+
+<!-- show details of each job when you click the widget -->
+<div class="detailsContainer" *ngIf="showDetails">
+    <div>
+        <img src="{{fullDetails.logo}}" width="50px">
+        <h4>{{fullDetails.company}}</h4>
+        <p>Title: {{fullDetails.title}}</p>
+        <p>Location: {{fullDetails.location}}</p>
+        <p>Type: {{fullDetails.type}}</p>
+    </div>
+    <div [innerHTML]="details"></div>
+</div>
+
+
+
+<!-- modal to update all the job details -->
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Job Details</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <img src="{{fullDetails.logo}}" width="50px">
+        <h4>{{fullDetails.company}}</h4>
+        <p>Title: {{fullDetails.title}}</p>
+        <p>Location: {{fullDetails.location}}</p>
+        <p>Type: {{fullDetails.type}}</p>
+        <p>Date Posted: {{fullDetails.created_at}}</p>
+        <form (submit)="updateJobDetails(fullDetails.id)">
+            <div class="form-group row">
+                <label class="col-lg-2 col-form-label">Status:</label>
+                <div class="col-lg">
+                    <select [(ngModel)]="fullDetails.status" value="fullDetails.status" name="updateJob.status">
+                        <option value="Interested">Interested</option>
+                        <option value="Applied">Applied</option>
+                        <option value="Interview">Interview</option>
+                        <option value="Offer">Offer</option>
+                        <option value="Denied">Denied</option>
+                    </select>
+                </div>
+            </div>
+            <p>Contact:</p>
+            <div class="form-group row">
+                <label class="col-lg-2 col-form-label">Name:</label>
+                <div class="col-lg">
+                    <input [(ngModel)]="fullDetails.contactName" value="fullDetails.contactName"
+                        name="updateJob.contactName" type="text" class="form-control">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-lg-2 col-form-label">Position:</label>
+                <div class="col-lg">
+                    <input [(ngModel)]="fullDetails.contactPosition" value="fullDetails.contactPosition"
+                        name="updateJob.contactPosition" type="text" class="form-control">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-lg-2 col-form-label">Email:</label>
+                <div class="col-lg">
+                    <input [(ngModel)]="fullDetails.contactEmail" value="fullDetails.contactEmail"
+                        name="updateJob.contactEmail" type="text" class="form-control">
+                </div>
+            </div>
+            <p>Compensation:</p>
+            <div class="form-group row">
+                <label class="col-lg-2 col-form-label">Salary Range:</label>
+                <div class="col-lg-2">
+                    <input [(ngModel)]="fullDetails.salaryRange" value="fullDetails.salaryRange"
+                        name="updateJob.salaryRange" type="number" class="form-control">
+                </div>
+                <label class="col-lg-2 col-form-label">Performance Bonus:</label>
+                <div class="col-lg-2">
+                    <input [(ngModel)]="fullDetails.performanceBonus" value="fullDetails.performanceBonus"
+                        name="updateJob.performanceBonus" type="checkbox" value="1" class="form-control">
+                </div>
+                <label class="col-lg-2 col-form-label">Stock Compensation:</label>
+                <div class="col-lg-2">
+                    <input [(ngModel)]="fullDetails.stockCompensation" value="fullDetails.stockCompensation"
+                        name="updateJob.stockCompensation" type="checkbox" value="1" class="form-control">
+                </div>
+            </div>
+            <p>Benefits:</p>
+            <div class="form-group row">
+                <label class="col-lg-2 col-form-label">Health:</label>
+                <div class="col-lg-2">
+                    <input [(ngModel)]="fullDetails.health" value="fullDetails.health" name="updateJob.health"
+                        type="checkbox" value="1" class="">
+                </div>
+                <label class="col-lg-2 col-form-label">Dental:</label>
+                <div class="col-lg-2">
+                    <input [(ngModel)]="fullDetails.dental" value="fullDetails.dental" name="updateJob.dental"
+                        type="checkbox" value="1" class="">
+                </div>
+                <label class="col-lg-2 col-form-label">Vision:</label>
+                <div class="col-lg-2">
+                    <input [(ngModel)]="fullDetails.vision" value="fullDetails.vision" name="updateJob.vision"
+                        type="checkbox" value="1" class="">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-lg-2 col-form-label">401K Match:</label>
+                <div class="col-lg-2">
+                    <input [(ngModel)]="fullDetails.K" value="fullDetails.K" name="updateJob.K" type="checkbox"
+                        value="1" class="form-control">
+                </div>
+                <label class="col-lg-2 col-form-label">Life Insurance:</label>
+                <div class="col-lg-2">
+                    <input [(ngModel)]="fullDetails.lifeInsurance" value="fullDetails.lifeInsurance"
+                        name="updateJob.lifeInsurance" type="checkbox" value="1" class="form-control">
+                </div>
+                <label class="col-lg-2 col-form-label">Commuter Stipend:</label>
+                <div class="col-lg-2">
+                    <input [(ngModel)]="fullDetails.commuterStipend" value="fullDetails.commuterStipend"
+                        name="updateJob.commuterStipend" type="checkbox" value="1" class="form-control">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-lg-2 col-form-label">Catered Lunch:</label>
+                <div class="col-lg-2">
+                    <input [(ngModel)]="fullDetails.cateredLunch" value="fullDetails.cateredLunch"
+                        name="updateJob.cateredLunch" type="checkbox" value="1" class="form-control">
+                </div>
+                <label class="col-lg-2 col-form-label">Gym Stipend:</label>
+                <div class="col-lg-2">
+                    <input [(ngModel)]="fullDetails.gymStipend" value="fullDetails.gymStipend"
+                        name="updateJob.gymStipend" type="checkbox" value="1" class="form-control">
+                </div>
+                <label class="col-lg-2 col-form-label">Phone Stipend:</label>
+                <div class="col-lg-2">
+                    <input [(ngModel)]="fullDetails.phoneStipend" value="fullDetails.phoneStipend"
+                        name="updateJob.phoneStipend" type="checkbox" value="1" class="form-control">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-info">Update Details</button>
+            <button type="button" class="btn btn-light ml-2" (click)="modal.close('Close click')">Close</button>
+        </form>
+    </div>
+</ng-template>

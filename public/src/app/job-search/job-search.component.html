@@ -1,0 +1,45 @@
+<app-navbar></app-navbar>
+
+<img src="https://www.cv-library.co.uk/career-advice/wp-content/uploads/2018/06/What-is-it-like-working-in-IT.jpg" alt="working" class="workImg">
+
+<h1 class="title">Search Jobs</h1>
+<p class="titleCaption" >Hundreds of job postings at the click of a button</p>
+
+<div class="formWrapper">
+  <form (submit)="searchForJob()" method="POST">
+    <input class="form-control col-5 d-inline ml-4" placeholder="Job Title, Keywords, Company" type="text"
+    [(ngModel)]="job.keyWord" name="job.keyWord">
+    <input class="form-control col-5 d-inline ml-4" placeholder="City, State or Zip Code" type="text"
+    [(ngModel)]="job.location" name="job.location">
+    <button class="btn btn-primary ml-2" type="submit">Search</button>
+  </form>
+</div>
+
+<div class="leftContainer">
+  <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+  <div  class="resultsContainer" *ngFor="let i of searchResults" (click)="showJobDetails(i)">
+    <div #target class="resultsLeft">
+      <img src="{{i.company_logo}}" alt="logo" width="45">
+    </div>
+    <div class="resultsMiddle">
+      <p class="jobTitle">{{i.title}}</p>
+      <p class="jobCompany">{{i.company}}</p>
+      <p class="jobLocation">{{i.location}}</p>
+    </div>
+    <div class="resultsRight">
+      <i (click)="addFavoriteJob(i); successAlert()" class="fas fa-star starIcon" triggers="click" [autoClose]="true" ngbTooltip="Saved!"
+      #tooltip3="ngbTooltip"></i>
+    </div>
+  </div>
+</div>
+
+<div class="detailsContainer" *ngIf="showDetails">
+  <img src="{{fullDetails.company_logo}}" width="200">
+  <h4>{{fullDetails.company}}</h4>
+  <p>Title: {{fullDetails.title}}</p>
+  <p>Location: {{fullDetails.location}}</p>
+  <p>Type: {{fullDetails.type}}</p>
+  <p>Date Posted: {{fullDetails.created_at}}</p>
+  <div [innerHTML]="details"></div>
+</div>
+

@@ -1,0 +1,53 @@
+<head>
+  <title>Joblify</title>
+</head>
+
+
+<body>
+  <div class="text-center features-blue">
+    <div class="container">
+      <div class="intro">
+        <h2 class="text-center">Joblify</h2>
+        <p class="text-center">Applying for a job is a job in itself. Stay organized with Joblify.</p>
+      </div>
+
+      <form (submit)="login()">
+        <input [(ngModel)]="logUser.email" value="{{logUser.email}}}" type="text" name="logUser.email">
+        <input [(ngModel)]="logUser.password" class="ml-1 mb-3" value="logUser.password" type="password"
+          name="logUser.password">
+        <button class="btn-secondary ml-1" type="submit">Login</button>
+      </form>
+
+      <div class="row features">
+        <div class="col-sm-6 col-md-4 item"><i class="fa fa-search icon"></i>
+          <h3 class="name">Search for Jobs</h3>
+          <p class="description">Search for engineering jobs using the Github Jobs API or manually add your own job
+            requisition.</p>
+        </div>
+        <div class="col-sm-6 col-md-4 item"><i class="fas fa-address-card icon"></i>
+          <h3 class="name">Stay Organized</h3>
+          <p class="description">Attach recruiter contact info, compensation and benefits to each job.&nbsp;</p>
+        </div>
+        <div class="col-sm-6 col-md-4 item"><i class="fas fa-chalkboard icon"></i>
+          <h3 class="name">Status Board</h3>
+          <p class="description">Visualize the status of each application based on Interested, Applied, Interview, Offer
+            and Denied.</p>
+        </div>
+        <div class="col-sm-6 col-md-4 item"><i class="fa fa-pie-chart icon"></i>
+          <h3 class="name">Metrics</h3>
+          <p class="description">Receive insightful charts that summarize your job application metrics</p>
+        </div>
+        <div class="col-sm-6 col-md-4 item"><i class="material-icons icon">compare</i>
+          <h3 class="name">Compare</h3>
+          <p class="description">Select two jobs and see a side-by-side comparison each job offer</p>
+        </div>
+        <div class="col-sm-6 col-md-4 item"><i class="fas fa-upload icon"></i>
+          <h3 class="name">Add Jobs</h3>
+          <p class="description">Add other jobs from outside sources</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+</body>
